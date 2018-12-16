@@ -6,108 +6,107 @@ using ThaymesCabs.Models;
 
 namespace ThaymesCabs.Controllers
 {
-    [Authorize]
-    public class DriversController : Controller
+    public class CarsController : Controller
     {
         private readonly ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Drivers
+        // GET: Cars
         public ActionResult Index()
         {
-            return View(db.Drivers.ToList());
+            return View(db.Cars.ToList());
         }
 
-        // GET: Drivers/Details/5
+        // GET: Cars/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var driver = db.Drivers.Find(id);
-            if (driver == null)
+            var car = db.Cars.Find(id);
+            if (car == null)
             {
                 return HttpNotFound();
             }
-            return View(driver);
+            return View(car);
         }
 
-        // GET: Drivers/Create
+        // GET: Cars/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Drivers/Create
+        // POST: Cars/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DriverId,FirstName,LastName,LicenceNumber,Age")] Driver driver)
+        public ActionResult Create([Bind(Include = "CarId,CarRegistration,Model,Year")] Car car)
         {
             if (ModelState.IsValid)
             {
-                db.Drivers.Add(driver);
+                db.Cars.Add(car);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(driver);
+            return View(car);
         }
 
-        // GET: Drivers/Edit/5
+        // GET: Cars/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Driver driver = db.Drivers.Find(id);
-            if (driver == null)
+            var car = db.Cars.Find(id);
+            if (car == null)
             {
                 return HttpNotFound();
             }
-            return View(driver);
+            return View(car);
         }
 
-        // POST: Drivers/Edit/5
+        // POST: Cars/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DriverId,FirstName,LastName,LicenceNumber,Age")] Driver driver)
+        public ActionResult Edit([Bind(Include = "CarId,CarRegistration,Model,Year")] Car car)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(driver).State = EntityState.Modified;
+                db.Entry(car).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(driver);
+            return View(car);
         }
 
-        // GET: Drivers/Delete/5
+        // GET: Cars/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Driver driver = db.Drivers.Find(id);
-            if (driver == null)
+            var car = db.Cars.Find(id);
+            if (car == null)
             {
                 return HttpNotFound();
             }
-            return View(driver);
+            return View(car);
         }
 
-        // POST: Drivers/Delete/5
+        // POST: Cars/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var driver = db.Drivers.Find(id);
-            if (driver != null) db.Drivers.Remove(driver);
+            var car = db.Cars.Find(id);
+            db.Cars.Remove(car);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

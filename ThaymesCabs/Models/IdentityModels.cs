@@ -31,5 +31,7 @@ namespace ThaymesCabs.Models
         }
 
         public System.Data.Entity.DbSet<ThaymesCabs.Models.Driver> Drivers { get; set; }
+
+        public System.Data.Entity.DbSet<ThaymesCabs.Models.Car> Cars { get; set; }
     }
 }
