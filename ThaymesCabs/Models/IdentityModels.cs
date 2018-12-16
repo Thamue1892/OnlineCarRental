@@ -29,5 +29,7 @@ namespace ThaymesCabs.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<ThaymesCabs.Models.Driver> Drivers { get; set; }
     }
 }
